@@ -8,7 +8,7 @@ const template = {
       step: "installPlugin",
       pluginData: {
         resource: "url",
-        url: "https://github-proxy.com/proxy/?repo=woocommerce/woocommerce&release={release}&asset=woocommerce.zip",
+        url: "https://github-proxy.com/proxy/?repo=woocommerce/woocommerce&release={release}&asset={asset}",
       },
     },
     {
@@ -59,6 +59,16 @@ export default {
     response.steps[0].pluginData.url = response.steps[0].pluginData.url.replace(
       "{release}",
       release
+    );
+
+    let asset = "woocommerce.zip";
+    if (release === "nightly") {
+      asset = "woocommerce-trunk-nightly.zip";
+    }
+
+    response.steps[0].pluginData.url = response.steps[0].pluginData.url.replace(
+      "{asset}",
+      asset
     );
 
     // Return the JSON with proper headers

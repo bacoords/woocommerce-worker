@@ -63,8 +63,8 @@ export default {
     );
 
     if ( smoothGen === "true" ) {
-      // Add smooth generator plugin install as second step
-      response.steps.splice(1, 0, {
+      // Add smooth generator plugin install as the last step
+      response.steps.push({
         step: "installPlugin",
         pluginData: {
           resource: "url",

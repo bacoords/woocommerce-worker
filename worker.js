@@ -71,6 +71,7 @@ export default {
           url: "https://github-proxy.com/proxy/?repo=woocommerce/wc-smooth-generator&release=latest&asset=wc-smooth-generator.zip",
         },
       });
+    }
 
     let asset = "woocommerce.zip";
     if (release === "nightly") {

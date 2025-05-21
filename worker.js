@@ -51,6 +51,7 @@ export default {
     // Parse the URL to get the release parameter
     const url = new URL(request.url);
     const release = url.searchParams.get("release") || "latest";
+    const smoothGen = url.searchParams.get("smooth-generator") || "false";
 
     // Create a deep copy of the template
     const response = JSON.parse(JSON.stringify(template));
@@ -60,6 +61,16 @@ export default {
       "{release}",
       release
     );
+
+    if ( smoothGen === "true" ) {
+      // Add smooth generator plugin install as second step
+      response.steps.splice(1, 0, {
+        step: "installPlugin",
+        pluginData: {
+          resource: "url",
+          url: "https://github-proxy.com/proxy/?repo=woocommerce/wc-smooth-generator&release=latest&asset=wc-smooth-generator.zip",
+        },
+      });
 
     let asset = "woocommerce.zip";
     if (release === "nightly") {

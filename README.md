@@ -66,7 +66,7 @@ The blueprint configures the following:
 
 - **Store Location**: Poland (Wrocław)
 - **Currency**: PLN (Polish Złoty)
-- **Measurement Units**: 
+- **Measurement Units**:
   - Weight: Ounces (oz)
   - Dimensions: Inches (in)
 - **Payment Methods**: Check payments enabled
@@ -84,4 +84,24 @@ To modify the blueprint, edit the template object in `worker.js`.
 
 ## Contributing
 
-Feel free to submit issues and enhancement requests! 
+Feel free to submit issues and enhancement requests!
+
+### Running Locally
+
+To run the worker locally for development and testing:
+
+1. Install dependencies (if any):
+
+```bash
+npm install
+```
+
+2. Start the local development server:
+
+```bash
+wrangler dev
+```
+
+3. The worker will be available at a local address (usually `http://localhost:8787`). You can use this URL as your `blueprint-url` in WordPress Playground for local testing (ex: `https://playground.wordpress.net/?blueprint-url=http://localhost:8787`)
+
+Refer to the [Cloudflare Workers documentation](https://developers.cloudflare.com/workers/) for more details.

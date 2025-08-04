@@ -62,7 +62,7 @@ export default {
       release
     );
 
-    if ( smoothGen === "true" ) {
+    if (smoothGen === "true") {
       // Add smooth generator plugin install as the last step
       response.steps.push({
         step: "installPlugin",
@@ -70,6 +70,10 @@ export default {
           resource: "url",
           url: "https://github-proxy.com/proxy/?repo=woocommerce/wc-smooth-generator&release=latest&asset=wc-smooth-generator.zip",
         },
+      });
+      response.steps.push({
+        step: "wp-cli",
+        command: "wp wc generate orders 10",
       });
     }
 

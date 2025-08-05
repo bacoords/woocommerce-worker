@@ -42,23 +42,7 @@ https://woocommerce-worker.briancoords-com.workers.dev/?release=9.8.0-beta.1
 
 ## Deployment
 
-1. Install Wrangler:
-
-```bash
-npm install -g wrangler
-```
-
-2. Login to Cloudflare:
-
-```bash
-wrangler login
-```
-
-3. Deploy the worker:
-
-```bash
-wrangler deploy
-```
+Automatically deploys on PR merge.
 
 ## Blueprint Configuration
 

@@ -2,7 +2,7 @@
 const template = {
   landingPage: "/wp-admin/admin.php?page=wc-admin",
   login: true,
-  features: { networking: true },
+  features: { networking: true, intl: true },
   steps: [
     {
       step: "installPlugin",
@@ -69,6 +69,10 @@ export default {
         pluginData: {
           resource: "url",
           url: "https://github-proxy.com/proxy/?repo=woocommerce/wc-smooth-generator&release=latest&asset=wc-smooth-generator.zip",
+        },
+        options: {
+          activate: true,
+          targetFolderName: "wc-smooth-generator",
         },
       });
       response.steps.push({

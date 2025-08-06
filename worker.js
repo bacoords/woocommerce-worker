@@ -13,6 +13,13 @@ const template = {
       },
     },
     {
+      step: "installTheme",
+      themeData: {
+        resource: "url",
+        url: "https://github-proxy.com/proxy/?repo=woocommerce/woo-themes&branch=trunk&directory=purple",
+      },
+    },
+    {
       step: "writeFile",
       path: "/wordpress/wp-content/mu-plugins/rewrite.php",
       data: "<?php /* Use pretty permalinks */ add_action( 'after_setup_theme', function() { global $wp_rewrite; $wp_rewrite->set_permalink_structure('/%postname%/'); $wp_rewrite->flush_rules(); } );",
@@ -35,6 +42,7 @@ const template = {
         woocommerce_cheque_settings: {
           enabled: "yes",
         },
+        woocommerce_coming_soon: "no",
       },
     },
     {
@@ -54,15 +62,7 @@ const template = {
     },
     {
       step: "wp-cli",
-      command: "wp wc generate customers 10",
-    },
-    {
-      step: "wp-cli",
       command: "wp wc generate products 20",
-    },
-    {
-      step: "wp-cli",
-      command: "wp wc generate orders 20",
     },
   ],
 };
@@ -72,9 +72,19 @@ export default {
     // Parse the URL to get the release parameter
     const url = new URL(request.url);
     const release = url.searchParams.get("release") || "latest";
+    const orders = url.searchParams.get("orders")
+      ? parseInt(url.searchParams.get("orders"))
+      : 0;
 
     // Create a deep copy of the template
     const response = JSON.parse(JSON.stringify(template));
+
+    if (orders) {
+      response.steps.push({
+        step: "wp-cli",
+        command: `wp wc generate orders ${orders}`,
+      });
+    }
 
     // Update the release in the URL
     response.steps[0].pluginData.url = response.steps[0].pluginData.url.replace(

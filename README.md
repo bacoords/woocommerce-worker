@@ -12,11 +12,20 @@ The worker is designed to work with WordPress Playground (https://playground.wor
 - Skips the onboarding wizard
 - Configures basic WooCommerce settings
 - Installs WC Smooth Generator
-- Generates 20 products and 20 orders
+- Generates products and categories
+- Can conditionally generate demo orders
 
 ## Usage
 
-### Basic Usage with WordPress Playground
+### Default
+
+WooCommerce with the latest release:
+
+```txt
+https://playground.wordpress.net/?blueprint-url=https://woocommerce-worker.briancoords-com.workers.dev
+```
+
+### Custom release
 
 To test a specific WooCommerce release:
 
@@ -24,14 +33,14 @@ To test a specific WooCommerce release:
 https://playground.wordpress.net/?blueprint-url=https://woocommerce-worker.briancoords-com.workers.dev/?release=9.8.0-beta.1
 ```
 
-Replace `9.8.0-beta.1` with any WooCommerce version you want to test. The release must match the tag on Github.
+Replace `9.8.0-beta.1` with any WooCommerce version you want to test. The release must match the tag on Github and also accepts `nightly`.
 
-### Default Release
+### Demo Customers and Orders
 
-If no release is specified, the worker will use 'latest':
+Pass `orders=X` to generate orders and customers in the backend for richer demo data. Example:
 
-```txt
-https://playground.wordpress.net/?blueprint-url=https://woocommerce-worker.briancoords-com.workers.dev
+```
+https://playground.wordpress.net/?blueprint-url=https://woocommerce-worker.briancoords-com.workers.dev/?orders=50
 ```
 
 ### Direct JSON Access

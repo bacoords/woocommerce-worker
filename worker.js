@@ -42,6 +42,7 @@ const template = {
         woocommerce_cheque_settings: {
           enabled: "yes",
         },
+        woocommerce_coming_soon: "no",
       },
     },
     {

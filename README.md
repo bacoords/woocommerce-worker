@@ -11,6 +11,8 @@ The worker is designed to work with WordPress Playground (https://playground.wor
 - Sets up basic store information
 - Skips the onboarding wizard
 - Configures basic WooCommerce settings
+- Installs WC Smooth Generator
+- Generates 20 products and 20 orders
 
 ## Usage
 

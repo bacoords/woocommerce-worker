@@ -1,5 +1,6 @@
 // Template JSON stored as a constant
 const template = {
+  $schema: "https://playground.wordpress.net/blueprint-schema.json",
   landingPage: "/wp-admin/admin.php?page=wc-admin",
   login: true,
   features: { networking: true, intl: true },
@@ -37,11 +38,31 @@ const template = {
       },
     },
     {
-      step: "importWxr",
-      file: {
+      step: "installPlugin",
+      pluginData: {
         resource: "url",
-        url: "https://raw.githubusercontent.com/woocommerce/woocommerce/refs/heads/trunk/plugins/woocommerce/sample-data/sample_products.xml",
+        url: "https://github-proxy.com/proxy/?repo=woocommerce/wc-smooth-generator&release=latest&asset=wc-smooth-generator.zip",
       },
+      options: {
+        activate: true,
+        targetFolderName: "wc-smooth-generator",
+      },
+    },
+    {
+      step: "wp-cli",
+      command: "wp wc generate terms product_cat 10 --max-depth=2",
+    },
+    {
+      step: "wp-cli",
+      command: "wp wc generate customers 10",
+    },
+    {
+      step: "wp-cli",
+      command: "wp wc generate products 20",
+    },
+    {
+      step: "wp-cli",
+      command: "wp wc generate orders 20",
     },
   ],
 };
@@ -51,7 +72,6 @@ export default {
     // Parse the URL to get the release parameter
     const url = new URL(request.url);
     const release = url.searchParams.get("release") || "latest";
-    const smoothGen = url.searchParams.get("smooth-generator") || "false";
 
     // Create a deep copy of the template
     const response = JSON.parse(JSON.stringify(template));
@@ -61,25 +81,6 @@ export default {
       "{release}",
       release
     );
-
-    if (smoothGen === "true") {
-      // Add smooth generator plugin install as the last step
-      response.steps.push({
-        step: "installPlugin",
-        pluginData: {
-          resource: "url",
-          url: "https://github-proxy.com/proxy/?repo=woocommerce/wc-smooth-generator&release=latest&asset=wc-smooth-generator.zip",
-        },
-        options: {
-          activate: true,
-          targetFolderName: "wc-smooth-generator",
-        },
-      });
-      response.steps.push({
-        step: "wp-cli",
-        command: "wp wc generate orders 10",
-      });
-    }
 
     let asset = "woocommerce.zip";
     if (release === "nightly") {

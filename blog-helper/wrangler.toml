@@ -1,6 +1,7 @@
 name = "blog-helper"
 main = "worker.js"
 compatibility_date = "2024-03-18"
+account_id = "c31726800fb4d77d19e71398ce0b3f28"
 
 [vars]
 # Add your GitHub token as a secret: wrangler secret put GITHUB_TOKEN

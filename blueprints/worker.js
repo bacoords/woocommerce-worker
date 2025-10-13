@@ -13,6 +13,17 @@ const template = {
       },
     },
     {
+      step: "installPlugin",
+      pluginData: {
+        resource: "url",
+        url: "https://github-proxy.com/proxy/?repo=WordPress/gutenberg&release=latest&asset=gutenberg.zip",
+      },
+      options: {
+        activate: true,
+        targetFolderName: "gutenberg",
+      },
+    },
+    {
       step: "installTheme",
       themeData: {
         resource: "url",

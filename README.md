@@ -59,10 +59,10 @@ Automatically deploys on PR merge.
 
 The blueprint configures the following:
 
-- **Store Location**: Poland (Wrocław)
-- **Currency**: PLN (Polish Złoty)
+- **Store Location**: Los Angeles
+- **Currency**: USD
 - **Measurement Units**:
-  - Weight: Ounces (oz)
+  - Weight: Pounds (lbs)
   - Dimensions: Inches (in)
 - **Payment Methods**: Check payments enabled
 - **Tracking**: Disabled

@@ -75,6 +75,14 @@ const template = {
       step: "wp-cli",
       command: "wp wc generate products 20",
     },
+    {
+      step: "updateUserMeta",
+      meta: {
+        admin_color: "modern",
+        show_welcome_panel: 0,
+      },
+      userId: 1,
+    },
   ],
 };
 
@@ -86,6 +94,8 @@ export default {
     const orders = url.searchParams.get("orders")
       ? parseInt(url.searchParams.get("orders"))
       : 0;
+    const theme = url.searchParams.get("theme");
+    const wp = url.searchParams.get("wp");
 
     // Create a deep copy of the template
     const response = JSON.parse(JSON.stringify(template));
@@ -95,6 +105,26 @@ export default {
         step: "wp-cli",
         command: `wp wc generate orders ${orders}`,
       });
+    }
+
+    // Update the theme if a custom theme slug is provided
+    if (theme) {
+      // Find the installTheme step (currently at index 2)
+      const themeStepIndex = response.steps.findIndex(
+        (step) => step.step === "installTheme"
+      );
+      if (themeStepIndex !== -1) {
+        response.steps[
+          themeStepIndex
+        ].themeData.url = `https://downloads.wordpress.org/theme/${theme}.latest-stable.zip`;
+      }
+    }
+
+    // Add WordPress version parameter if specified
+    if (wp) {
+      response.preferredVersions = {
+        wp: wp,
+      };
     }
 
     // Update the release in the URL
